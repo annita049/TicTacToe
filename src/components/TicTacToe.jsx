@@ -44,13 +44,11 @@ const checkWinner = (tiles, setstrikeClass, setGameState)=>{
       return ; // if someone wins draw condition is ignored.
     }
   }
-
   const allTilesFilled = tiles.every((tile)=> tile!=null);
   console.log(allTilesFilled);
   // console.log(GameState);
   if(allTilesFilled)
     setGameState(GameState.draw);
-  
 }
 
 
@@ -77,13 +75,20 @@ const TicTacToe = () => {
     checkWinner(tiles, setstrikeClass, setGameState);
   },[tiles]);
 
+  const HandleReplay = () => {
+    setTiles(Array(9).fill(null));
+    setPlayerTurn(player_X);
+    setstrikeClass(null);
+    setGameState(GameState.inprogress);
+    console.log("Replay");
+  }
 
   return (
     <div>
       <h1>TicTacToe</h1>
       <Board strike={strikeClass} playerTurn={playerTurn} tiles={tiles} onTileClick={handleTileClick}/>
       <GameOver gameState={gameState}/>
-      <Replay gameState={gameState}/>
+      <Replay gameState={gameState} onReplay={HandleReplay}/>
     </div>
   )
 }

@@ -1,10 +1,10 @@
 import GameState from "./GameState";
 
-const Replay = ({gameState}) => {
-    console.log("reset button?",gameState);
+const Replay = ({gameState, onReplay}) => {
+    console.log("replay button?", gameState);
     if(gameState!==GameState.inprogress){
         return (
-            <button className="replay-button">Replay</button>
+            <button className="replay-button" onClick={onReplay}> Play Again! </button>
         )
     }
 }
