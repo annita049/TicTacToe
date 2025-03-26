@@ -34,14 +34,21 @@ h1 {
   border-bottom: 0.2em solid #0074a6;
 }
 
+
 .x-hover:hover::after {
   content: "X";
-  opacity: 0.4;
+  opacity: 0.35;
 }
+
+/* .x-hover::after {
+  content: 'O';
+  opacity: 0;
+  transition: opacity 100ms ease-in;
+} */
 
 .o-hover:hover::after {
   content: "O";
-  opacity: 0.4;
+  opacity: 0.35;
 }
 
 .strike {

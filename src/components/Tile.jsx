@@ -1,6 +1,9 @@
-const Tile = ({className, value, onClick}) => {
+const Tile = ({className, value, onClick, playerTurn}) => {
+  let hoverClass = null;
+  if(value == null)
+    hoverClass = `${playerTurn.toLowerCase()}-hover`;
   return (
-    <div  onClick= {onClick} className={`tile ${className}`}>{value}</div>
+    <div playerTurn={playerTurn} onClick= {onClick} className={`tile ${className} ${hoverClass}`}>{value}</div>
   )
 }
 

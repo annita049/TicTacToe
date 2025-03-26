@@ -1,6 +1,6 @@
-const Strike = () => {
+const Strike = ({strike}) => {
   return (
-    <div className="strike"></div>
+    <div className={`strike ${strike}`}></div>
   )
 }
 
