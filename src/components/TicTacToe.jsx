@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import GameOver from './GameOver';
 
 import GameState from './GameState.js';
+import Replay from './Replay.jsx';
 
 const player_X = 'X';
 const player_O = 'O';
@@ -49,8 +50,7 @@ const checkWinner = (tiles, setstrikeClass, setGameState)=>{
   // console.log(GameState);
   if(allTilesFilled)
     setGameState(GameState.draw);
-
-  // if(nox.length==9) setGameState(GameState.draw);
+  
 }
 
 
@@ -60,8 +60,12 @@ const TicTacToe = () => {
   const [strikeClass, setstrikeClass] = useState();
   const [gameState, setGameState] = useState(GameState.inprogress);
 
-  const handleTileClick = (index)=>{ //index of the tile clicked
-    if(tiles[index]) return;
+  const handleTileClick = (index)=>{ //index of the tiles clicked
+
+    if(gameState != GameState.inprogress)
+      return;
+
+    if (tiles[index] !== null) return;
     const newTiles = [...tiles]; // a new array is taken cause
     // state updates are supposed to be immutable in react
     newTiles[index] = playerTurn; 
@@ -79,6 +83,7 @@ const TicTacToe = () => {
       <h1>TicTacToe</h1>
       <Board strike={strikeClass} playerTurn={playerTurn} tiles={tiles} onTileClick={handleTileClick}/>
       <GameOver gameState={gameState}/>
+      <Replay gameState={gameState}/>
     </div>
   )
 }
