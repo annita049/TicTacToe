@@ -5,6 +5,16 @@ import GameOver from './GameOver';
 import GameState from './GameState.js';
 import Replay from './Replay.jsx';
 
+// sound effects
+import clickSoundAssest from '../sounds/click_sound.wav';
+import gameOverSoundAssest from '../sounds/gameover_sound.wav';
+
+const gameOverSound = new Audio(gameOverSoundAssest);
+gameOverSound.volume = 0.2;
+
+const clickSound = new Audio(clickSoundAssest);
+clickSound.volume = 0.5;
+
 const player_X = 'X';
 const player_O = 'O';
 
@@ -74,6 +84,18 @@ const TicTacToe = () => {
   useEffect(()=>{
     checkWinner(tiles, setstrikeClass, setGameState);
   },[tiles]);
+
+  useEffect(() => {
+    if (tiles.some(tile => tile != null)) {
+      clickSound.play().catch(error => console.error('Playback failed:', error));
+    }
+  }, [tiles]);
+
+  useEffect(()=>{
+    if (gameState !== GameOver.inprogress){
+      gameOverSound.play();
+    }
+  },[gameState]);
 
   const HandleReplay = () => {
     setTiles(Array(9).fill(null));
